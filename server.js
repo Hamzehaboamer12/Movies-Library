@@ -27,8 +27,8 @@ server.use(handelservererror);
 
 let url =`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.APIKEY}&language=en-US`;
 let numberOfRecipes=2;
-let userSearch = "Eternals";
-let userSearch2 = "The Matrix Resurrections";
+let userSearch = "The Tomorrow War";
+ let userSearch2 = "The 355";
 
 
 function handelservererror (error,req , res){
@@ -54,7 +54,8 @@ function Movei (id , title , release_date , poster_path , overview){
    
 function handelsearch(req , res){
     // let newArr = [];
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&number=${numberOfRecipes}&query=${userSearch2}`;
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&number=${numberOfRecipes}&query=${userSearch}`;
+    let url2 = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&number=${numberOfRecipes}&query=${userSearch2}`;
 
     axios.get(url)
     .then(results=>{
@@ -64,35 +65,9 @@ function handelsearch(req , res){
         });
         res.status(200).json(movies);  
      }).catch(err=>{
+        handelservererror (error,req , res);
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     axios.get(url)
-//     .then(results=>{
-//         // console.log(result.data.recipes);
-//         results.data.results.forEach(val =>{
-//             newArr.push(new Movei(val.id, val.title, val.release_date, val.poster_path, val.overview));
-   
-//    });
-//    // console.log(result.data.movie);
- 
-//     res.status(200).json(newArr);
-//      }).catch(err=>{
-
-//     })
 
 }
 
@@ -115,6 +90,7 @@ function handeltrending(req , res){
          res.status(200).json(newArr);
 
     }).catch((err)=>{
+        handelservererror (error,req , res);
 
     })
 }
