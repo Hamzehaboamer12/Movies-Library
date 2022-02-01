@@ -22,6 +22,7 @@ server.get('/search',handelsearch);
 
 server.get('*',handelNotFound);
 server.use(handelservererror);
+
 // server.use(errorHandler)
 
 
@@ -94,12 +95,21 @@ function handeltrending(req , res){
 
     })
 }
+
+function handelservererror (error,req , res){
+
+    const err ={
+        status : 500,
+        message : error
+    }
+ 
+      res.status(500).send(err);
+ 
+ }
+=======
   // result.data.Movei.forEach(Movei =>{
         //     newArr.push(new Movei(Movei.id,recipe.title,Movei.release_date,Movei.poster_path,Movei.overview));
         // })
-
-
-
 
 
 function handelNotFound(req , res){
