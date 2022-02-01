@@ -15,7 +15,7 @@ server.use(cors());
 server.get('/', handelData);
 server.get('/favorite',handelfavorite);
 server.get('*',handelNotFound);
-server.get('/servererror ',handelservererror);
+server.use(handelservererror);
 
 
 
@@ -24,6 +24,16 @@ this.title = title;
 this.poster_path = poster_path;
 this.overview = overview;
 }
+function handelservererror (error,req , res){
+
+    const err ={
+        status : 500,
+        message : error
+    }
+ 
+      res.status(500).send(err);
+ 
+ }
 function handelNotFound(req , res){
     res.status(404).send('This page does not exist :/ ');
 }
