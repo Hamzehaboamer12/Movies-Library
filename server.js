@@ -21,11 +21,12 @@ server.get('/', handelData);
 server.get('/favorite',handelfavorite);
 server.post('/addMovie',addmyFavMoviesHandler);
 server.get('/getMovies',getMoviesHandler);
+
+server.get('/getMovie/:id',getMoviesHandlerid);
+server.put('/updateMovie/:id',updateMovieHandler); 
+server.delete('/deleteMovie/:id',deleteMovieHandler);
 server.use('*',handelNotFound);
 server.use(handelservererror);
-
-
-
 
 
 function Movei (title , poster_path , overview){
@@ -33,6 +34,42 @@ this.title = title;
 this.poster_path = poster_path;
 this.overview = overview;
 }
+
+
+function updateMovieHandler (req,res){
+    const id = req.params.id;
+    //console.log(req.params.id);
+    const movie = req.body;
+    // console.log(movie);
+    console.log(movie);
+    const sql = `UPDATE movie SET title =$1, poster_path = $2, overview=$3  WHERE id=$4 RETURNING *;`;
+    let values=[movie.title , movie.poster_path , movie.overview,id];
+    client.query(sql,values).then(data=>{
+        res.status(200).json(data.rows);
+        // res.status(204)
+    }).catch(error=>{
+        handelservererror(error,req,res)
+    });
+}
+
+
+
+
+function deleteMovieHandler(req,res){
+    const id = req.params.id;
+    const sql = `DELETE FROM movie WHERE id=${id};` 
+    // DELETE FROM table_name WHERE condition;
+
+    client.query(sql).then(()=>{
+        res.status(200).send("The Recipe has been deleted");
+        // res.status(204).json({});
+    }).catch(error=>{
+        handelservererror(error,req,res)
+    });
+}
+
+
+
 
 function addmyFavMoviesHandler(req,res){
    const movies = req.body;
@@ -57,6 +94,15 @@ function addmyFavMoviesHandler(req,res){
 
 
 
+function getMoviesHandlerid(req,res){
+    const id = req.params.id;
+    let sql = `SELECT * FROM movie WHERE id=${id} ;`;
+    client.query(sql).then(data=>{
+       res.status(200).json(data.rows);
+    }).catch(error=>{
+        handelservererror(error,req,res)
+    });
+}
 
 
 function handelservererror (error,req,res){
