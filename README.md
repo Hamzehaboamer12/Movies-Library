@@ -15,7 +15,10 @@ Add an image of your WRRC here
 <!-- What are the features included in you app -->
 
 
+![Alt text](img/pic3.png)
+
+
 ![Alt text](img/pic.png)
-=======
+
 ![Alt text](./img/pic.png)
 
