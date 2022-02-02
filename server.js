@@ -14,6 +14,8 @@ const client = new pg.Client(process.env.DATABASE_URL);
 const server=express();
 server.use(cors());
 
+server.use(express.json());
+
 
 server.get('/', handelData);
 server.get('/favorite',handelfavorite);
@@ -33,10 +35,10 @@ this.overview = overview;
 }
 
 function addmyFavMoviesHandler(req,res){
-    const movies = req.body;
-   //  console.log(movies);
-    let sql = `INSERT INTO movie(title,poster_path,overview) VALUES ($1,$2,$3,) RETURNING *;`
-    let values=[movies.title , movies.poster_path , movies.overview];
+   // const movies = req.body;
+     console.log(movies);
+    let sql = `INSERT INTO movie(title,poster_path,overview) VALUES ($1,$2,$3) RETURNING *;`
+    let values=[movies.title || '', movies.poster_path||'' , movies.overview||''];
     client.query(sql,values).then(data =>{
         res.status(200).json(data.rows);
     }).catch(error=>{
