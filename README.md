@@ -14,4 +14,11 @@ Add an image of your WRRC here
 ## Project Features
 <!-- What are the features included in you app -->
 
+
 ![Alt text](img/pic3.png)
+
+
+![Alt text](img/pic.png)
+
+![Alt text](./img/pic.png)
+
