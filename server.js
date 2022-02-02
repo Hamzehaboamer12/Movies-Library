@@ -20,7 +20,7 @@ server.use(express.json());
 server.get('/', handelData);
 server.get('/favorite',handelfavorite);
 server.post('/addMovie',addmyFavMoviesHandler);
-server.get('/myFavMovies',myFavMoviesHandler);
+server.get('/getMovies',getMoviesHandler);
 server.use('*',handelNotFound);
 server.use(handelservererror);
 
@@ -35,8 +35,8 @@ this.overview = overview;
 }
 
 function addmyFavMoviesHandler(req,res){
-   // const movies = req.body;
-     console.log(movies);
+   const movies = req.body;
+     //console.log(movies);
     let sql = `INSERT INTO movie(title,poster_path,overview) VALUES ($1,$2,$3) RETURNING *;`
     let values=[movies.title || '', movies.poster_path||'' , movies.overview||''];
     client.query(sql,values).then(data =>{
@@ -46,7 +46,7 @@ function addmyFavMoviesHandler(req,res){
     });
   }
 
-  function myFavMoviesHandler(req,res){
+  function getMoviesHandler(req,res){
     let sql = `SELECT * FROM movie;`;
     client.query(sql).then(data=>{
        res.status(200).json(data.rows);
