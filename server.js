@@ -68,7 +68,7 @@ this.title = title;
 this.poster_path = poster_path;
 this.overview = overview;
 }
-
+}
 
 function updateMovieHandler (req,res){
     const id = req.params.id;
@@ -104,7 +104,7 @@ function deleteMovieHandler(req,res){
 
 
 
-}
+
 
 function Movei (id , title , release_date , poster_path , overview){
     this.id = id;    
