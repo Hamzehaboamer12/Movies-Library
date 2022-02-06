@@ -70,7 +70,7 @@ this.title = title;
 this.poster_path = poster_path;
 this.overview = overview;
 }
-
+}
 
 function updateMovieHandler (req,res){
     const id = req.params.id;
