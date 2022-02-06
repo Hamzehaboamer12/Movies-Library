@@ -12,7 +12,7 @@ const pg = require('pg');
 // const client = new pg.Client(process.env.DATABASE_URL);
 const client = new pg.Client({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+     ssl: { rejectUnauthorized: false }
 })
 
 const axios = require('axios');
@@ -61,7 +61,9 @@ function handelservererror (error,req , res){
        message : error
    }
 
+
      res.status(500).send(err);
+}
 
 function Movei (title , poster_path , overview){
 this.title = title;
@@ -104,7 +106,7 @@ function deleteMovieHandler(req,res){
 
 
 
-}
+
 
 function Movei (id , title , release_date , poster_path , overview){
     this.id = id;    
