@@ -9,7 +9,11 @@ const dataMovie =require('./movie Data/data.json');
 
 const pg = require('pg');
 
-const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+})
 
 const axios = require('axios');
 
@@ -155,7 +159,7 @@ function handeltrending(req , res){
     })
 }
 
-function handelservererror (error,req , res){
+//function handelservererror (error,req , res){
 
 
 
@@ -210,8 +214,7 @@ function handelNotFound(req , res){
 // function handelservererror(req , res){
 //     res.status(500).send('This page have server error :/ ');
 // }
-=======
-=======
+
   // result.data.Movei.forEach(Movei =>{
         //     newArr.push(new Movei(Movei.id,recipe.title,Movei.release_date,Movei.poster_path,Movei.overview));
         // })
@@ -243,7 +246,7 @@ function handelfavorite(req,res){
 
 
 client.connect().then(()=>{
-server.listen(4000,()=>{
+
 
 
 server.listen(PORT,()=>{

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines":{
+     "node" : "16.13.2"
+    } ,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +28,8 @@
     "express": "^4.17.2",
     "pg": "^8.7.1"
 
-    "express": "^4.17.2"
+    
 
   }
+
 }
